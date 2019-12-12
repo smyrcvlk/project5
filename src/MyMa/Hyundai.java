@@ -3,7 +3,32 @@ package MyMa;
 import java.text.DecimalFormat;
 
 public class Hyundai extends carLease implements carInterface {
+    public Hyundai(String name, String whichModel, int age, int salary, int totalCost, int downPayment, int termofLease, int leaseFee, double taxRate, double moneyFactor) {
+        super(name, whichModel, age, salary, totalCost, downPayment, termofLease, leaseFee, taxRate, moneyFactor);
+    }
 
+    @Override
+    public String leaseMonthlyCalculator() {
+        double result= calculateDepreciation() + calculateInterest() + taxes();
+        DecimalFormat df= new DecimalFormat("0.00");
+        return df.format(result);
+    }
+
+    @Override
+    public boolean isAligable() {
+        if (salary>hyundaiMinIncome) {
+            return true;
+        }
+        else
+            return false;
+
+    }
+    public String totalCalculator() {
+        double result=(( Double.valueOf(leaseMonthlyCalculator()) * termofLease) + documentationFees);
+        DecimalFormat df= new DecimalFormat("0.00");
+        return df.format(result);
+    }
+}
     /*
 
       get the connection with carLease and carInterface
@@ -41,4 +66,4 @@ public class Hyundai extends carLease implements carInterface {
 
      */
 
-}
+
